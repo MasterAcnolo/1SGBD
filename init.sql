@@ -1,25 +1,46 @@
--- LISTE DES DONNEES SUPLEMENTAIRES
--- GUERRE (Défenseur / Attaquant ou équivalent)
--- ALLIANCE (Pays 1, Pays 2)
--- ARMEE (Champ Infanteries, Artillerie, )
+-- base de destination
+CREATE DATABASE IF NOT EXISTS NewWorld;
+USE NewWorld;
 
-CREATE TABLE IF NOT EXISTS `GUERRE`(
-    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-    `id_pays_attaquant` INTEGER NOT NULL,
-    `id_pays_defenseur` INTEGER NOT NULL,
-    `estActive` BOOLEAN DEFAULT TRUE,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_pays_attaquant`) REFERENCES `country`(`ID`),
-    FOREIGN KEY (`id_pays_defenseur`) REFERENCES `country`(`ID`)
+-- reset tables
+DROP TABLE IF EXISTS ARMEE;
+DROP TABLE IF EXISTS GUERRE;
+DROP TABLE IF EXISTS CountryLanguage;
+DROP TABLE IF EXISTS City;
+DROP TABLE IF EXISTS Country;
+
+-- copie des tables world
+CREATE TABLE Country LIKE world.Country;
+INSERT INTO Country SELECT * FROM world.Country;
+
+CREATE TABLE City LIKE world.City;
+INSERT INTO City SELECT * FROM world.City;
+
+CREATE TABLE CountryLanguage LIKE world.CountryLanguage;
+INSERT INTO CountryLanguage SELECT * FROM world.CountryLanguage;
+
+-- tables du jeu
+CREATE TABLE GUERRE(
+    id INT NOT NULL AUTO_INCREMENT,
+    code_pays_attaquant CHAR(3) NOT NULL,
+    code_pays_defenseur CHAR(3) NOT NULL,
+    estActive BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (id)
 );
 
--- Table ARMEE avec relation vers la table pays
-CREATE TABLE IF NOT EXISTS `ARMEE`(
-    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-    `id_pays` INTEGER NOT NULL,
-    `nombre_soldats` INTEGER DEFAULT 0,
-    `nombre_chars` INTEGER DEFAULT 0,
-    `nombre_avions` INTEGER DEFAULT 0,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_pays`) REFERENCES `country`(`ID`)
+CREATE TABLE ARMEE(
+    id INT NOT NULL AUTO_INCREMENT,
+    code_pays CHAR(3) NOT NULL,
+    nombre_soldats INT DEFAULT 0,
+    nombre_chars INT DEFAULT 0,
+    nombre_avions INT DEFAULT 0,
+    PRIMARY KEY (id)
 );
+
+-- FK
+ALTER TABLE GUERRE
+ADD CONSTRAINT fk_guerre_attaquant FOREIGN KEY (code_pays_attaquant) REFERENCES Country(Code),
+ADD CONSTRAINT fk_guerre_defenseur FOREIGN KEY (code_pays_defenseur) REFERENCES Country(Code);
+
+ALTER TABLE ARMEE
+ADD CONSTRAINT fk_armee_code_pays FOREIGN KEY (code_pays) REFERENCES Country(Code);
