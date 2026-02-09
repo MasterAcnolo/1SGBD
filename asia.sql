@@ -1,1 +1,0 @@
--- La Corée du Nord et la Corée du Sud ont fusionné et ont uni leurs forces afin de conquérir la Chine et le Japon. Ce nouvel empire s’appelle désormais « La Grande Corée ».
