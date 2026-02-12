@@ -1,0 +1,2 @@
+use NewWorld;
+SELECT * FROM COUNTRY WHERE Code = "GKR"
