@@ -44,7 +44,7 @@ SELECT
     'South America', 
     'South America', 
     @totalPop,
-    69,  -- Buenos Aires (capitale temporaire)
+    69,  -- Buenos Aires
     @totalSurface,
     @avgLifeExpectancy,
     @totalGNP,
