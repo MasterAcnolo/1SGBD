@@ -1,6 +1,6 @@
 -- base de destination
-CREATE DATABASE IF NOT EXISTS NewWorld;
-USE NewWorld;
+CREATE DATABASE IF NOT EXISTS WorldCopy;
+USE WorldCopy;
 
 -- reset tables
 DROP TABLE IF EXISTS CountryLanguage;

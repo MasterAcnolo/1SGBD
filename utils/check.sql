@@ -1,4 +1,4 @@
-USE newWorld;
+USE WorldCopy;
 
 -- Tables principales World
 DESCRIBE Country;

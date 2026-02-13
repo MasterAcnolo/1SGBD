@@ -1,4 +1,4 @@
-use NewWorld;
+use WorldCopy;
 
 DESCRIBE Country;
 DESCRIBE City;

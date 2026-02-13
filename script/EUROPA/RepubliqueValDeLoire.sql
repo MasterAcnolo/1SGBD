@@ -1,4 +1,4 @@
-USE NewWorld;
+USE WorldCopy;
 
 START TRANSACTION;
 
