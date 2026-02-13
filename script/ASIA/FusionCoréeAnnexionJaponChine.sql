@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- La Corée du Nord et la Corée du Sud ont fusionné et ont uni leurs forces afin de conquérir la Chine et le Japon. Ce nouvel empire s'appelle désormais « La Grande Corée ».
 
--- Affichage des pays avant la conquête
-SELECT * FROM Country WHERE Code IN ('PRK', 'KOR', 'CHN', 'JPN');
-
 -- Calcul des statistiques totales des pays conquis
 SET @totalSurface := (
     SELECT SUM(SurfaceArea) 
@@ -89,9 +86,5 @@ VALUES ('GKR', 'Japanese', 'T', 10.0);
 -- Suppression des pays conquis
 DELETE FROM Country
 WHERE Code IN ('PRK', 'KOR', 'CHN', 'JPN');
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code = 'GKR';
-SELECT COUNT(*) AS NbVillesGrandeCoree FROM City WHERE CountryCode = 'GKR';
 
 COMMIT;

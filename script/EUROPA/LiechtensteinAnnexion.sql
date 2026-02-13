@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- Le Liechtenstein a annexé la Suisse et la Lombardie.
 
--- Affichage avant l'annexion
-SELECT * FROM Country WHERE Code IN ('LIE', 'CHE', 'ITA');
-
 -- Calcul des statistiques de la Suisse
 SET @surfaceSuisse := (
     SELECT SurfaceArea
@@ -90,10 +87,5 @@ WHERE CountryCode = 'CHE';
 -- Suppression de la Suisse
 DELETE FROM Country
 WHERE Code = 'CHE';
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code = 'LIE';
-SELECT * FROM Country WHERE Code = 'ITA';
-SELECT COUNT(*) AS NbVillesLiechtenstein FROM City WHERE CountryCode = 'LIE';
 
 COMMIT;

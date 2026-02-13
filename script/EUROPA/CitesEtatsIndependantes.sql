@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- Lyon, Caen et Lille sont désormais trois cités-États indépendantes.
 
--- Affichage de la France avant les sécessions
-SELECT * FROM Country WHERE Code = 'FRA';
-
 -- Calcul de la population des trois cités
 SET @populationLyon := (
     SELECT Population
@@ -124,10 +121,5 @@ VALUES ('LIL', 'French', 'T', 100.0);
 -- Ajout de la langue officielle pour Caen
 INSERT INTO CountryLanguage (CountryCode, Language, IsOfficial, Percentage)
 VALUES ('CAE', 'French', 'T', 100.0);
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code IN ('LYO', 'LIL', 'CAE');
-SELECT * FROM Country WHERE Code = 'FRA';
-SELECT * FROM City WHERE CountryCode IN ('LYO', 'LIL', 'CAE');
 
 COMMIT;

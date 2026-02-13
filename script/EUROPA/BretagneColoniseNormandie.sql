@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- En France, la Bretagne a colonisé la Normandie et forme désormais un nouvel état souverain, dont la langue officielle est le breton et dont la capitale est Rennes.
 
--- Affichage de la France avant la sécession
-SELECT * FROM Country WHERE Code = 'FRA';
-
 -- Calcul de la population des régions qui font sécession
 SET @populationBretagne := (
     SELECT SUM(Population)
@@ -55,10 +52,5 @@ VALUES ('BRZ', 'Breton', 'T', 85.0);
 
 INSERT INTO CountryLanguage (CountryCode, Language, IsOfficial, Percentage)
 VALUES ('BRZ', 'French', 'F', 15.0);
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code = 'BRZ';
-SELECT * FROM Country WHERE Code = 'FRA';
-SELECT COUNT(*) AS NbVillesBretagne FROM City WHERE CountryCode = 'BRZ';
 
 COMMIT; 

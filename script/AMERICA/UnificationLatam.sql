@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- En réaction, tous les pays hispanophones au sud de la Colombie et du Brésil forment désormais un unique pays : les Nouveaux États-Unis d'Amérique.
 
--- Affichage des pays avant l'unification
-SELECT * FROM Country WHERE Code IN ('ARG', 'BOL', 'CHL', 'ECU', 'PER', 'PRY', 'URY');
-
 -- Calcul des statistiques totales des pays qui vont fusionner
 SET @totalSurface := (
     SELECT SUM(SurfaceArea) 
@@ -76,9 +73,5 @@ VALUES ('NEA', 'Spanish', 'T', 95.0);
 -- Suppression des pays unifiés
 DELETE FROM Country
 WHERE Code IN ('ARG', 'BOL', 'CHL', 'ECU', 'PER', 'PRY', 'URY');
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code = 'NEA';
-SELECT * FROM City WHERE CountryCode = 'NEA';
 
 COMMIT;

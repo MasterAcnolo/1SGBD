@@ -4,9 +4,6 @@ START TRANSACTION;
 
 -- La région Centre a déclaré son indépendance, s'est baptisée « République du Val de Loire » et a fait de Tours sa capitale.
 
--- Affichage de la France avant la sécession
-SELECT * FROM Country WHERE Code = 'FRA';
-
 -- Calcul de la population de la région Centre
 SET @populationCentre := (
     SELECT SUM(Population)
@@ -52,10 +49,5 @@ WHERE CountryCode = 'FRA'
 -- Ajout de la langue officielle du nouveau pays
 INSERT INTO CountryLanguage (CountryCode, Language, IsOfficial, Percentage)
 VALUES ('VDL', 'French', 'T', 100.0);
-
--- Vérification des résultats
-SELECT * FROM Country WHERE Code = 'VDL';
-SELECT * FROM Country WHERE Code = 'FRA';
-SELECT COUNT(*) AS NbVillesVDL FROM City WHERE CountryCode = 'VDL';
 
 COMMIT;
