@@ -32,7 +32,13 @@ Refonte complète de la base de données avec ajout de nouvelles entités pour l
 Contenu :
 - Scripts de création et d'insertion des données
 - Modélisation complète selon Merise (MCD, MLD, MPD)
-- Diagrammes Looping dans `blueprints/`
+
+### Diagrammes de modélisation
+
+**Emplacement :** `blueprints/`
+
+Fichiers Looping contenant les diagrammes MCD :
+- `MCD.loo` : diagramme Looping
 
 ### Utilitaires
 
