@@ -1,141 +1,75 @@
-# SupSimulation – Sujet de projet Base de Données
+﻿# 1SGBD - Projet Base de Données
 
-## Introduction
+## Description
 
-Vous êtes ingénieur en bases de données au sein du studio indépendant **SupGames**, actuellement en développement de son jeu **SupSimulation**.
+Projet de bases de données géopolitique développé dans le cadre du cours SGBD.
 
-SupSimulation est un jeu solo de **simulation géopolitique**. Le joueur choisit un pays et prend des décisions stratégiques : alliances, guerres, conquêtes de territoires, etc.  
-Chaque décision peut avoir des répercussions à l’échelle mondiale.
+## Structure du projet
 
-Le jeu est encore à l’état d’ébauche et repose sur la base de données **World**, fournie par MySQL :  
-https://downloads.mysql.com/docs/world-db.zip
+### Avant de commencer
 
-Une démonstration du jeu sera prochainement présentée à un éditeur dans l’objectif d’obtenir un soutien pour le projet.
+Avant de commencer, vérifiez que la base de données World de MySQL est propre. Si nécessaire, réinstallez-la avec le dump fourni dans `ressources/world.sql`.
 
----
+Ensuite, lancez le script `utils/dropWorldCopy.sql` si vous avez déjà lancé la base. Sinon, lancez `init.sql` puis testez les scénarios selon vos besoins. 
 
-## Partie 1 : Modification des données (12 points)
+### Partie 1 - Modification de la base World
 
-Afin d’appuyer la démonstration, vous devez **modifier les données de la base World** pour représenter un état du monde plausible après **une heure de jeu**.
+Scripts de modification des données originales de la base MySQL World pour simuler une heure de jeu géopolitique.
 
-### Objectif
+**Emplacement :** dossier `script/`
 
-- Produire **un script SQL par continent**
-- Chaque script doit contenir **tous les ajouts, modifications et suppressions nécessaires**
-- Les données doivent rester **cohérentes**
+Les scripts sont organisés par continent :
+- AMERICA : modifications sur le continent américain
+- EUROPA : modifications sur le continent européen
+- ASIA : modifications sur le continent asiatique
 
-### Remarque importante
+Chaque fichier constitue un scénario indépendant.
 
-Chaque modification doit prendre en compte **toutes ses implications**.
+### Partie 2 - Nouvelle modélisation NewWorld
 
-**Exemple : annexion du Portugal par l’Espagne**
-- Les villes portugaises deviennent espagnoles
-- La population, la surface et le PIB de l’Espagne augmentent
-- L’espérance de vie est recalculée
+Refonte complète de la base de données avec ajout de nouvelles entités pour le jeu de simulation.
 
-**Exemple : indépendance de Paris**
-- Création d’un nouveau pays
-- La population de Paris est retirée de celle de la France
+**Emplacement :** dossier `NewWorld/`
 
-Les données non directement déductibles peuvent être **définies arbitrairement**.
+Cette partie contient :
+- Scripts de création de la base optimisée
+- Scripts d'insertion des données
+- Modélisation complète selon Merise (MCD, MLD, MPD)
 
----
+**Diagrammes Looping :** dossier `blueprints/`
 
-### État du monde après une heure de jeu
+## Installation et lancement
 
-#### 1. Amérique
+### Prérequis
 
-- Le Canada annexe les États américains suivants :
-  - Michigan
-  - Wisconsin
-  - Illinois
-  - Alaska
-  - Washington
+- MySQL 8.0 ou supérieur
+- Accès à la base de données World de MySQL (Disponible dans `ressources/world.sql`)
 
-- Le Québec et l’Ontario deviennent un **État souverain**
-  - Capitale : Montréal
+### Partie 1 - Lancer les modifications World
 
-- Les États-Unis conquièrent :
-  - Mexique
-  - Cuba
-  - Venezuela
-  - Colombie
+Exécutez les scripts SQL dans l'ordre souhaité selon les continents :
 
-- En réaction, tous les pays **hispanophones situés au sud de la Colombie et du Brésil** fusionnent en un seul pays :
-  - **Les Nouveaux États-Unis d’Amérique**
+1. Connectez-vous à MySQL
+2. Sélectionnez la base World
+3. Exécutez les scripts du dossier `script/` par continent
 
----
+### Partie 2 - Créer la base NewWorld
 
-#### 2. Europe
+1. Connectez-vous à MySQL
+3. Exécutez le script `NewWorld/createNewWorld.sql`
+4. Testez avec `NewWorld/testInsert.sql`
 
-- En France :
-  - La Bretagne colonise la Normandie et devient un **État souverain**
-    - Capitale : Rennes
-    - Langue officielle : breton
-  - La région Centre devient indépendante sous le nom :
-    - **République du Val de Loire**
-    - Capitale : Tours
-  - Lyon, Caen et Lille deviennent des **cités-États indépendantes**
+### Utilitaires
 
-- Le Liechtenstein annexe :
-  - La Suisse
-  - La Lombardie
+Le dossier `utils/` contient des scripts de maintenance :
+- `check.sql` : vérification de la base
+- `dropWorld.sql` : suppression de la base World
+- `dropWorldCopy.sql` : suppression des copies
 
----
+## Documentation
 
-#### 3. Asie
+La documentation complète de la modélisation (analyse des limites, MCD, MLD, MPD) est disponible dans le document PDF joint au projet.
 
-- La Corée du Nord et la Corée du Sud fusionnent
-- Elles conquièrent :
-  - La Chine
-  - Le Japon
-- Le nouvel empire se nomme :
-  - **La Grande Corée**
+## Auteur
 
----
-
-## Partie 2 : Modélisation des données (8 points)
-
-La présentation a convaincu l’éditeur. Il faut désormais concevoir une base de données **plus réaliste et évolutive**.
-
-### 1. Modèle
-
-Dans un document **.pdf**, vous devez :
-
-- Expliquer les **limites de la base World** pour SupSimulation
-- Proposer une **nouvelle modélisation** adaptée au jeu
-- Respecter la méthode **Merise** :
-  - MCD (Modèle Conceptuel de Données)
-  - MLD (Modèle Logique de Données)
-  - MPD (Modèle Physique de Données)
-
-Le document doit contenir :
-- Les diagrammes directement intégrés au PDF
-- Un **dictionnaire des données** joint au format **.xlsx**
-
-⚠️ Les nouvelles entités doivent être **liées directement au gameplay**
-
-**Exemples pertinents**
-- Soldat
-- Sous-marin
-- Alliance
-- Guerre
-
-**Exemples non pertinents**
-- Joueur
-- Date de début de partie
-- Sauvegardes
-
----
-
-### 2. Création
-
-- Créer une nouvelle base de données : **NewWorld**
-- Créer toutes les tables issues de la modélisation
-- Insérer **au moins une ligne par table** pour démonstration
-
----
-
-## Bonus : Import des données (5 points)
-
-Proposer une **méthode intelligente** pour exporter les données de la base **World** vers la base **NewWorld**.
+Axel NICOLAS - SupInfo Caen - 2026
