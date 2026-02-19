@@ -76,7 +76,7 @@ CREATE TABLE Armee (
     PRIMARY KEY (id_armee),
     UNIQUE KEY uk_armee_pays (id_pays),
     CONSTRAINT fk_armee_pays FOREIGN KEY (id_pays) REFERENCES Pays(id_pays) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT chk_qualite CHECK (qualite_armee <= 255)
+    CONSTRAINT chk_qualite CHECK (qualite_armee <= 100)
 ) ENGINE=InnoDB;
 
 -- Table Langue
